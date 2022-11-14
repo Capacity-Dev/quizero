@@ -43,8 +43,9 @@ class Quiz
     private ?\DateTimeInterface $created_at = null;
 
     #[ORM\Column]
-    #[Groups(["getQuiz"])]
     #[Assert\NotBlank(message:"ce champ ne doit pas etre vide")]
+    #[Assert\LessThan(value: 0,message:"cette reponse n'est pas autorisé")]
+    #[Assert\GreaterThan(value: 2,message:"cette reponse n'est pas autorisé")]
     private ?int $true_answer = null;
 
     #[ORM\ManyToOne(inversedBy: 'relation')]

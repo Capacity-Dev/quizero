@@ -42,7 +42,7 @@ class EditQuiz extends Component{
         }else{
 
             axios.post(`http://localhost:8000/api/quiz`,data).then(res => {
-                window.location.replace('/');
+                window.location.replace('/manage');
             })
         }
       }

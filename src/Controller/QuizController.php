@@ -74,4 +74,18 @@ class QuizController extends AbstractController
             'message'=>'le quiz a été mis à jour'
         ),JsonResponse::HTTP_NO_CONTENT);
     }
+    #[Route('/api/quiz/verify/{id}', name:'quiz.verify', methods:['POST'])]
+    public function verifyAnswer(Quiz $quiz,Request $req): JsonResponse
+    {
+        $success=false;
+        $content=$req->toArray();
+        $client_answer=(int) $content['answer'];
+        if($client_answer==$quiz->getTrueAnswer()){
+            $success=true;
+        }
+        return $this->json(array(
+            'success'=>$success,
+            'answer'=>$quiz->getTrueAnswer()
+        ));
+    }
 }
